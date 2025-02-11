@@ -36,13 +36,13 @@ def delivery_callback(err, msg):
 
 if __name__ == "__main__":
     try:
-        for i in range(1, 2):
+        for i in range(1, 5001):
             data = fake.generate_account_holder(i)
             try:
                 producer.produce(topic, key=str(i), value=json.dumps(data), callback=delivery_callback)
             except Exception as e:
                 print(f"Error producing message: {e}")
-            time.sleep(0.1)
+            time.sleep(0.001)
         
         # Flush messages to ensure all are sent
         producer.flush(timeout=10)  # Add a timeout to avoid indefinite blocking

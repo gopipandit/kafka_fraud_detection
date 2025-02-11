@@ -1,12 +1,14 @@
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv
 import os
-import psycopg2
 import pandas as pd
 from sqlalchemy import create_engine, text
+import logging
+
 
 load_dotenv()
 
-
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
 class Connector:
     def __init__(self):
         self.__host = os.getenv('hostname')
@@ -89,6 +91,14 @@ class Connector:
                 print(f"Data from {sheet_name} loaded into {schema_name}.{table_name}")
         except Exception as e:
             print(f"Could not load {sheet_name} due to: {e}")
+
+    def __del__(self):
+            """
+            Dispose of the database engine when the object is destroyed.
+            """
+            if hasattr(self, '_Connector__engine'):
+                self.__engine.dispose()
+                logger.info("Database connection closed.")
 
 
 
