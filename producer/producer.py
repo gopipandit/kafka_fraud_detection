@@ -3,6 +3,11 @@ import json
 import time
 from dotenv import load_dotenv
 import os
+import sys
+sys.path.append("F:\\Data Engineering\\kafka_fraud_detection")
+from data_generator.fake_data import FakeDataGenerator 
+
+fake = FakeDataGenerator()
 
 # Load environment variables
 load_dotenv()
@@ -31,8 +36,8 @@ def delivery_callback(err, msg):
 
 if __name__ == "__main__":
     try:
-        for i in range(1, 1001):
-            data = {"_id": i, "message": f"Hello Kafka! From Gopi Pandit-{i}"}
+        for i in range(1, 2):
+            data = fake.generate_account_holder(i)
             try:
                 producer.produce(topic, key=str(i), value=json.dumps(data), callback=delivery_callback)
             except Exception as e:

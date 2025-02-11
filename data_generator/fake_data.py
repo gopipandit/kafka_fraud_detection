@@ -37,15 +37,15 @@ class FakeDataGenerator:
         }
         return account_holder
 
-# Example usage
-if __name__ == "__main__":
-    generator = FakeDataGenerator()
+# # Example usage
+# if __name__ == "__main__":
+#     generator = FakeDataGenerator()
 
-    # Generate a bank transaction
-    transaction = generator.generate_bank_transactions()
-    print("Generated Transaction:", transaction)
+#     # Generate a bank transaction
+#     transaction = generator.generate_bank_transactions()
+#     print("Generated Transaction:", transaction)
 
-    # Generate account holder data using the same user_id
-    user_id = transaction["user_id"]
-    account_holder = generator.generate_account_holder(user_id)
-    print("Generated Account Holder:", account_holder)
+#     # Generate account holder data using the same user_id
+#     user_id = transaction["user_id"]
+#     account_holder = generator.generate_account_holder(user_id)
+#     print("Generated Account Holder:", account_holder)
